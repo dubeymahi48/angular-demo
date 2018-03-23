@@ -1,0 +1,24 @@
+<form #heroForm="ngForm" (ngSubmit)='saveHero(heroForm.valid)' name="heroForm">
+  <input type="hidden"  class="form-control" name="id" [(ngModel)]="hero.id">
+  <div class="form-group" [ngClass]="{  
+    'has-danger has-error': (name.invalid && heroForm.submitted ) || (name.invalid && (name.dirty || name.touched)),  
+    'has-success': name.valid || (name.dirty || name.touched)}">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="hero.name" required>
+    <div *ngIf='name.dirty || name.touched || heroForm.submitted'>
+        <span  class="help-block" *ngIf="name.errors && name.errors.required ">Name filed is required.</span>
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{  
+    'has-danger has-error': (age.invalid && heroForm.submitted ) || (age.invalid && (age.dirty || age.touched)),  
+    'has-success': age.valid || (age.dirty || age.touched)}">
+      <label for="age">Age</label>
+      <input type="number" class="form-control" id="age" name="agde" #age="ngModel" [(ngModel)]="hero.age" required>
+      <div *ngIf='age.dirty || age.touched || heroForm.submitted'>
+          <span  class="help-block" *ngIf="age.errors && age.errors.required ">Age filed is required.</span>
+      </div>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="button" class="btn btn-default" (click)="cancelHero(hero)">Cancel</button>
+</form>
